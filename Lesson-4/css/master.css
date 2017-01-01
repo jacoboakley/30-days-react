@@ -1,0 +1,29 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.header {
+  align-items: center;
+  background: #ccc;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.item {
+  align-items: center;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.avatar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
