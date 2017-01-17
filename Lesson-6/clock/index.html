@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Clock</title>
+<!-- Script tags for React -->
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+<!-- Script tags for Babel -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<!-- Links for Stylesheets -->
+    <link rel="stylesheet" href="css/master.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/babel">
+
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);   // ALWAYS required
+
+        const currentTime = new Date();
+        this.state = {
+          hours: currentTime.getHours(),
+          minutes: currentTime.getMinutes(),
+          seconds: currentTime.getSeconds(),
+          ampm: currentTime.getHours() >= 12 ? 'pm' : 'am'
+        };
+
+        this.setTimer(); // start up the timeout
+      }
+
+      setTimer() {
+        setTimeout(this.updateClock.bind(this), 1000);
+      }
+
+      updateClock() {
+        const currentTime = new Date();
+        this.setState({
+          hours: currentTime.getHours(),
+          minutes: currentTime.getMinutes(),
+          seconds: currentTime.getSeconds(),
+          ampm: currentTime.getHours() >= 12 ? 'pm' : 'am'
+        }, this.setTimer)
+      }
+
+      render() {
+        const {hours, minutes, seconds, ampm} = this.state;
+        return(
+          <div className='clock'>
+          {
+            hours == 0 ? 12 :
+            (hours > 12) ?
+              hours - 12 : hours
+            }:{
+              minutes > 9 ? minutes : '0' + minutes
+            }:{
+              seconds > 9 ? seconds : '0' + seconds
+            } {ampm}
+            </div>
+          )
+        }
+      }
+
+      class App extends React.Component {
+        render() {
+          return(
+            <Clock />
+          )
+        }
+      }
+
+    var mountApp = document.querySelector('#app');
+    ReactDOM.render(<App />, mountApp);
+
+
+    </script>
+  </body>
+</html>
